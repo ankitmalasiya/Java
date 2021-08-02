@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.ankit</groupId>
+    <artifactId>spring-boot-h2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-boot-h2</name>
+    <description>Demo project for Spring Boot h2 in memory db</description>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <spring-boot.version>${project.parent.version}</spring-boot.version>
+
+        <!-- Application -->
+        <gson.version>2.8.5</gson.version>
+        <bootstrap.version>4.4.1</bootstrap.version>
+        <openapi-generator.version>3.3.4</openapi-generator.version>
+        <modelmapper.version>2.3.5</modelmapper.version>
+
+        <!-- Swagger -->
+        <jquery.version>3.4.1</jquery.version>
+        <swagger-ui.version>3.46.0</swagger-ui.version>
+        <swagger-annotations.version>1.6.2</swagger-annotations.version>
+
+        <!-- Unit test -->
+        <assertj-core.version>3.13.2</assertj-core.version>
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
+        <org.junit.platform.version>1.5.2</org.junit.platform.version>
+        <org.mockito.version>2.28.2</org.mockito.version>
+
+        <!-- Cucumber -->
+        <rest-assured.version>4.1.2</rest-assured.version>
+        <cucumber-java.version>4.2.6</cucumber-java.version>
+        <picocontainer.version>2.15</picocontainer.version>
+        <cucumber-reporting.version>4.5.1</cucumber-reporting.version>
+
+        <!-- Maven -->
+        <jacoco.version>0.8.5</jacoco.version>
+        <dependency-check-maven.version>6.0.3</dependency-check-maven.version>
+        <pitest-junit5-plugin.version>0.9</pitest-junit5-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+        <pit.mutationThreshold>95</pit.mutationThreshold>
+        <pit.coverageThreshold>95</pit.coverageThreshold>
+        <pitest-maven.version>1.4.9</pitest-maven.version>
+        <!--        <gitflow-maven-plugin.version>1.15.0</gitflow-maven-plugin.version>-->
+
+        <!-- SonarQube related properties -->
+        <sonar.maven.version>3.7.0.1746</sonar.maven.version>
+        <sonar.exclusions>
+            **/*nl/kvk/hr/domein/services/Application.java
+        </sonar.exclusions>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dependencyCheck.reportPath>${project.build.directory}/owasp-reports/dependency-check-report.xml
+        </sonar.dependencyCheck.reportPath>
+        <sonar.dependencyCheck.htmlReportPath>${project.build.directory}/owasp-reports/dependency-check-report.html
+        </sonar.dependencyCheck.htmlReportPath>
+        <sonar.dependencyCheck.xmlReportPath>${project.build.directory}/owasp-reports/dependency-check-report.xml
+        </sonar.dependencyCheck.xmlReportPath>
+        <dependency.check.report.dir>${project.build.directory}/owasp-reports/</dependency.check.report.dir>
+    </properties>
+
+    <!--    <scm>-->
+    <!--        <connection>scm:git:git@git.kvk.nl:so-marvel/repository.git</connection>-->
+    <!--        <developerConnection>scm:git:git@git.kvk.nl:so-marvel/repository.git</developerConnection>-->
+    <!--        <url>git@git.kvk.nl:so-marvel/repository.git</url>-->
+    <!--    </scm>-->
+
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <id>nexus</id>-->
+    <!--            <name>Nexus releases (nexus-int)</name>-->
+    <!--            <url>http://nexus-url.nl/repository/maven-releases/</url>-->
+    <!--        </repository>-->
+    <!--        <snapshotRepository>-->
+    <!--            <id>nexus</id>-->
+    <!--            <name>Nexus snapshots (nexus-int)</name>-->
+    <!--            <url>http://nexus-url.nl/repository/maven-snapshots/</url>-->
+    <!--        </snapshotRepository>-->
+    <!--    </distributionManagement>-->
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>pitest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <version>${pitest-maven.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.pitest</groupId>
+                                <artifactId>pitest-junit5-plugin</artifactId>
+                                <version>${pitest-junit5-plugin.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>mutationCoverage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <withHistory>true</withHistory>
+                            <timeoutConstant>5000</timeoutConstant>
+                            <timestampedReports>false</timestampedReports>
+                            <mutationThreshold>${pit.mutationThreshold}</mutationThreshold>
+                            <coverageThreshold>${pit.coverageThreshold}</coverageThreshold>
+                            <failWhenNoMutations>true</failWhenNoMutations>
+                            <targetClasses>
+                                <param>com.ankit.springboot.*</param>
+                                <param>com.ankit.springboot.service.*</param>
+                            </targetClasses>
+                            <targetTests>
+                                <param>com.ankit.springboot.service.*</param>
+                            </targetTests>
+                            <excludedClasses>
+                                <excludedClass>com.ankit.springboot-classpath</excludedClass>
+                            </excludedClasses>
+                            <outputFormats>
+                                <outputFormat>XML</outputFormat>
+                                <outputFormat>HTML</outputFormat>
+                            </outputFormats>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonar</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>${sonar.maven.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>sonar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dependency-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>${sonar.maven.version}</version>
+                    </plugin>
+                    <!--                    <plugin>-->
+                    <!--                        <groupId>org.owasp</groupId>-->
+                    <!--                        <artifactId>dependency-check-maven</artifactId>-->
+                    <!--                        <version>${dependency-check-maven.version}</version>-->
+                    <!--                        <configuration>-->
+                    <!--                            <format>ALL</format>-->
+                    <!--                            <outputDirectory>${dependency.check.report.dir}</outputDirectory>-->
+                    <!--                        </configuration>-->
+                    <!--                        <executions>-->
+                    <!--                            <execution>-->
+                    <!--                                <phase>verify</phase>-->
+                    <!--                                <goals>-->
+                    <!--                                    <goal>aggregate</goal>-->
+                    <!--                                </goals>-->
+                    <!--                            </execution>-->
+                    <!--                        </executions>-->
+                    <!--                    </plugin>-->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-enforcer-plugin</artifactId>-->
+            <!--                <version>${maven-enforcer-plugin.version}</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>enforce-bannedDependencies</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>enforce</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <rules>-->
+            <!--                                <bannedDependencies>-->
+            <!--                                    <excludes>-->
+            <!--                                        <exclude>*:dom4j:jar:1.6.1</exclude>-->
+            <!--                                    </excludes>-->
+            <!--                                </bannedDependencies>-->
+            <!--                            </rules>-->
+            <!--                            <fail>true</fail>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.springframework.boot</groupId>-->
+            <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <excludes>-->
+            <!--                        <exclude>-->
+            <!--                            <groupId>org.projectlombok</groupId>-->
+            <!--                            <artifactId>lombok</artifactId>-->
+            <!--                        </exclude>-->
+            <!--                    </excludes>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <append>true</append>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <append>true</append>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.maven.version}</version>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>pl.project13.maven</groupId>-->
+            <!--                <artifactId>git-commit-id-plugin</artifactId>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>get-the-git-infos</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>revision</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                    <execution>-->
+            <!--                        <id>validate-the-git-infos</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>validateRevision</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <offline>true</offline>-->
+            <!--                    <abbrevLength>8</abbrevLength>-->
+            <!--                    <generateGitPropertiesFile>true</generateGitPropertiesFile>-->
+            <!--                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties-->
+            <!--                    </generateGitPropertiesFilename>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.amashchenko.maven.plugin</groupId>-->
+            <!--                <artifactId>gitflow-maven-plugin</artifactId>-->
+            <!--                <version>${gitflow-maven-plugin.version}</version>-->
+            <!--                <configuration>-->
+            <!--                    <versionDigitToIncrement>1</versionDigitToIncrement>-->
+            <!--                    <pushRemote>true</pushRemote>-->
+            <!--                    <gitFlowConfig>-->
+            <!--                        <versionTagPrefix>v</versionTagPrefix>-->
+            <!--                    </gitFlowConfig>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+        </plugins>
+    </build>
+
+</project>
