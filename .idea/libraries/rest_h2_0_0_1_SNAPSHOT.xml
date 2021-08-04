@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rest-h2-0.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/rest-h2 - Copy/target/rest-h2-0.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

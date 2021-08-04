@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/restful-web-services/.mvn/.mvn.iml" filepath="$PROJECT_DIR$/restful-web-services/.mvn/.mvn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-streams-course-base/java-streams-course-base.iml" filepath="$PROJECT_DIR$/java-streams-course-base/java-streams-course-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest-h2/src/main/main.iml" filepath="$PROJECT_DIR$/rest-h2/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LexisAssignment/src/main/main1.iml" filepath="$PROJECT_DIR$/LexisAssignment/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/restful-web-services/src/main/main2.iml" filepath="$PROJECT_DIR$/restful-web-services/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest-h2 - Copy/src/main/main3.iml" filepath="$PROJECT_DIR$/rest-h2 - Copy/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-jwt/spring-boot-jwt.iml" filepath="$PROJECT_DIR$/spring-boot-jwt/spring-boot-jwt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/restful-web-services/src/test/test.iml" filepath="$PROJECT_DIR$/restful-web-services/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest-h2/src/test/test1.iml" filepath="$PROJECT_DIR$/rest-h2/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LexisAssignment/src/test/test2.iml" filepath="$PROJECT_DIR$/LexisAssignment/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest-h2 - Copy/src/test/test3.iml" filepath="$PROJECT_DIR$/rest-h2 - Copy/src/test/test3.iml" />
+    </modules>
+  </component>
+</project>
