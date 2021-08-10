@@ -25,19 +25,19 @@ Attach a README file describing:
 
 ### Minimal requirements ###
 * REST API
-    * `/artists` endpoint to manage Artist data. Required information: artist name
-        * `POST /artists` to save a new artist
-        * `PUT /artists/{artistId}` to update an existing artist
-        * `GET /artists` lists all artists. Implement:
-            * filtering by a part of artist name
-            * sorting by artist name (asc/desc)
-            * paging
-    * `/artists/{artistId}/albums` endpoint to manage Album data. Required information: title, year of release, genres (list of tags).
-        * `POST /artists/{artistId}/albums` to add a new album to an existing artist
-        * `PUT /artists/{artistId}/albums/{albumId}` to update an existing album
-        * `GET /artists/{artistId}/albums` lists all albums by the given artist. Implement:
-            * filtering by genre(s)
-            * sorting by album name and release year (asc/desc)
+  * `/artists` endpoint to manage Artist data. Required information: artist name
+      * `POST /artists` to save a new artist
+      * `PUT /artists/{artistId}` to update an existing artist
+      * `GET /artists` lists all artists. Implement:
+        * filtering by a part of artist name
+        * sorting by artist name (asc/desc)
+        * paging
+  * `/artists/{artistId}/albums` endpoint to manage Album data. Required information: title, year of release, genres (list of tags).
+      * `POST /artists/{artistId}/albums` to add a new album to an existing artist
+      * `PUT /artists/{artistId}/albums/{albumId}` to update an existing album
+      * `GET /artists/{artistId}/albums` lists all albums by the given artist. Implement:
+        * filtering by genre(s)
+        * sorting by album name and release year (asc/desc)
 * Data persistence (embedded DB of your choice)
 * Tests should be an integral part of your solution
 

@@ -1,5 +1,9 @@
 package com.lexis.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +20,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ARTISTS")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Artist {
 
 	@Id
@@ -29,43 +36,8 @@ public class Artist {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "artist")
 	private Set<Album> albums = new HashSet<>();
 
-	public Artist() {
-		super();
-	}
-
-	public Artist(Long id, @NotNull String name) {
-		super();
+	public Artist(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<Album> getAlbums() {
-		return albums;
-	}
-
-	public void setAlbums(Set<Album> albums) {
-		this.albums = albums;
-	}
-
-	@Override
-	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + ", albums=" + albums + "]";
-	}
-
 }
